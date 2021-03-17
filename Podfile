@@ -15,6 +15,8 @@ pod 'Firebase/Analytics'
 pod 'Firebase/Messaging'
 pod 'FirebaseFirestoreSwift'
 
+pod 'Alamofire'
+
 pod 'Gallery'
 pod 'RealmSwift'
 
@@ -24,5 +26,6 @@ pod 'SKPhotoBrowser'
 pod 'MessageKit'
 pod 'InputBarAccessoryView'
 
+pod 'SwiftyJSON'
 
 end

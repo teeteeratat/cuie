@@ -212,6 +212,7 @@ PODS:
     - abseil/base/base_internal
     - abseil/base/config
     - abseil/meta/type_traits
+  - Alamofire (5.4.1)
   - BoringSSL-GRPC (0.0.7):
     - BoringSSL-GRPC/Implementation (= 0.0.7)
     - BoringSSL-GRPC/Interface (= 0.0.7)
@@ -368,8 +369,10 @@ PODS:
   - RealmSwift (10.5.1):
     - Realm (= 10.5.1)
   - SKPhotoBrowser (6.1.0)
+  - SwiftyJSON (5.0.0)
 
 DEPENDENCIES:
+  - Alamofire
   - Firebase/Analytics
   - Firebase/Auth
   - Firebase/Core
@@ -383,10 +386,12 @@ DEPENDENCIES:
   - ProgressHUD
   - RealmSwift
   - SKPhotoBrowser
+  - SwiftyJSON
 
 SPEC REPOS:
   trunk:
     - abseil
+    - Alamofire
     - BoringSSL-GRPC
     - Firebase
     - FirebaseAnalytics
@@ -416,9 +421,11 @@ SPEC REPOS:
     - Realm
     - RealmSwift
     - SKPhotoBrowser
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   abseil: 6c8eb7892aefa08d929b39f9bb108e5367e3228f
+  Alamofire: 2291f7d21ca607c491dd17642e5d40fdcda0e65c
   BoringSSL-GRPC: 8edf627ee524575e2f8d19d56f068b448eea3879
   Firebase: c23a36d9e4cdf7877dfcba8dd0c58add66358999
   FirebaseAnalytics: 3bb096873ee0d7fa4b6c70f5e9166b6da413cc7f
@@ -448,7 +455,8 @@ SPEC CHECKSUMS:
   Realm: 77fcb4e0b9f2963ea06f584749a0d7dc9cab95e1
   RealmSwift: 6abe6aa6cd8b70cc1a87afcb9232cabea74ff1ac
   SKPhotoBrowser: 343de95d89dc7913763c5dda243cc6e606e4a168
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: bbc238ec6bc491ffcf19eb017f468074ad4e23a1
+PODFILE CHECKSUM: 9ff52e6a87e59812c5a611a9f1b603e85787594c
 
 COCOAPODS: 1.10.1

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Alamofire
 
 class LoginViewController: UIViewController {
 
@@ -45,11 +46,17 @@ class LoginViewController: UIViewController {
         statusPickerView.delegate = self
         statusPickerView.dataSource = self
         statusPickerView.tag = 1
+        //Mark - back-end connection
         
     }
-    
     //Mark IBActions
-    @IBAction func LogInButtonPressed(_ sender: Any) {
+    @IBAction func LogInButtonPressed(_ sender: UIButton) {
+        if sender.titleLabel?.text == "Log In" {
+            logIn()
+        }
+        if sender.titleLabel?.text == "Register" {
+            signUp()
+        }
     }
     
     @IBAction func ForgetPasswordButtonPressed(_ sender: Any) {
@@ -57,6 +64,7 @@ class LoginViewController: UIViewController {
     
     @IBAction func SingUpButtonPressed(_ sender: UIButton) {
         updateUIFor(login: sender.titleLabel?.text == "Log In.")
+        
     }
     
     
@@ -105,6 +113,7 @@ class LoginViewController: UIViewController {
         self.present(mainView, animated: true, completion: nil)
     }
     
+    
 }
 
 extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -125,4 +134,44 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         StatusTextField.text = status[row]
         StatusTextField.resignFirstResponder()
     }
+}
+
+extension LoginViewController {
+    func signUp() {
+        let registerParams: [String: String?] = [
+            "name": NameTextField.text,
+            "surname": SurnameTextField.text,
+            "userID": StudentNumberTextField.text,
+            "email": emailTextField.text,
+            "password": PasswordTextField.text,
+            "status": StatusTextField.text
+        ]
+        let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signup", method: .post, parameters: registerParams)
+       
+        request.responseJSON { (data) in
+            print(data.response?.statusCode)
+            print(data)
+            if let code = data.response?.statusCode {
+                switch code {
+                case 200...299: break
+                    
+                default:
+                    print("-")
+                }
+            }
+        }
+    }
+    
+    func logIn() {
+        let logInParams: [String: String?] = [
+            "userID": StudentNumberTextField.text,
+            "password": PasswordTextField.text,
+        ]
+        let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signin", method: .post, parameters: logInParams)
+        request.responseJSON { (data) in
+            print(data.response?.statusCode)
+            print(data)
+        }
+    }
+    
 }
