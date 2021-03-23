@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2248A075260A0AC90083AE7F /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2248A074260A0AC90083AE7F /* TabBarController.swift */; };
+		2248A078260A10750083AE7F /* TabBarStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2248A077260A10750083AE7F /* TabBarStoryboard.storyboard */; };
 		C9F11655D28EADCE5D759A92 /* Pods_Messenger.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = BAB619EEE338A9DE052DB654 /* Pods_Messenger.framework */; };
 		F2887A0E25DA5C6500B53DD6 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2887A0D25DA5C6500B53DD6 /* SettingsTableViewController.swift */; };
 		F2887A1125E3989B00B53DD6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2887A1025E3989B00B53DD6 /* User.swift */; };
@@ -15,12 +17,11 @@
 		F2E3239E25C14DB60075EB2A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F2E3239D25C14DB60075EB2A /* LoginViewController.swift */; };
 		F2E323A125C14DB60075EB2A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E3239F25C14DB60075EB2A /* Main.storyboard */; };
 		F2E323A325C14DB70075EB2A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F2E323A225C14DB70075EB2A /* Assets.xcassets */; };
-		F2E323A625C14DB70075EB2A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F2E323A425C14DB70075EB2A /* LaunchScreen.storyboard */; };
-		F2E3243825C171B00075EB2A /* Downloads in Resources */ = {isa = PBXBuildFile; fileRef = F2E3243725C171B00075EB2A /* Downloads */; };
-		F2E3243B25C171E10075EB2A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F2E3243A25C171E10075EB2A /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2248A074260A0AC90083AE7F /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		2248A077260A10750083AE7F /* TabBarStoryboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TabBarStoryboard.storyboard; sourceTree = "<group>"; };
 		78AE80725C1199E44D57BFA4 /* Pods-Messenger.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.debug.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.debug.xcconfig"; sourceTree = "<group>"; };
 		BAB619EEE338A9DE052DB654 /* Pods_Messenger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Messenger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BB25BAF0F3BE337B62C90030 /* Pods-Messenger.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Messenger.release.xcconfig"; path = "Target Support Files/Pods-Messenger/Pods-Messenger.release.xcconfig"; sourceTree = "<group>"; };
@@ -32,10 +33,7 @@
 		F2E3239D25C14DB60075EB2A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		F2E323A025C14DB60075EB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F2E323A225C14DB70075EB2A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		F2E323A525C14DB70075EB2A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		F2E323A725C14DB70075EB2A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		F2E3243725C171B00075EB2A /* Downloads */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Downloads; path = ../../../Downloads; sourceTree = "<group>"; };
-		F2E3243A25C171E10075EB2A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -50,6 +48,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2248A06E2609FD6C0083AE7F /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F2887A0D25DA5C6500B53DD6 /* SettingsTableViewController.swift */,
+				F2E3239D25C14DB60075EB2A /* LoginViewController.swift */,
+				2248A074260A0AC90083AE7F /* TabBarController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
 		2A60D6C13D4CAEE994777306 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -87,17 +95,14 @@
 		F2E3239825C14DB60075EB2A /* Messenger */ = {
 			isa = PBXGroup;
 			children = (
+				2248A06E2609FD6C0083AE7F /* Controller */,
 				F2E3239925C14DB60075EB2A /* AppDelegate.swift */,
 				F2E3239B25C14DB60075EB2A /* SceneDelegate.swift */,
-				F2E3239D25C14DB60075EB2A /* LoginViewController.swift */,
 				F2887A1325E398A700B53DD6 /* Model */,
-				F2887A0D25DA5C6500B53DD6 /* SettingsTableViewController.swift */,
 				F2E3239F25C14DB60075EB2A /* Main.storyboard */,
 				F2E323A225C14DB70075EB2A /* Assets.xcassets */,
-				F2E323A425C14DB70075EB2A /* LaunchScreen.storyboard */,
 				F2E323A725C14DB70075EB2A /* Info.plist */,
-				F2E3243A25C171E10075EB2A /* GoogleService-Info.plist */,
-				F2E3243725C171B00075EB2A /* Downloads */,
+				2248A077260A10750083AE7F /* TabBarStoryboard.storyboard */,
 			);
 			path = Messenger;
 			sourceTree = "<group>";
@@ -170,11 +175,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F2E3243825C171B00075EB2A /* Downloads in Resources */,
-				F2E323A625C14DB70075EB2A /* LaunchScreen.storyboard in Resources */,
-				F2E3243B25C171E10075EB2A /* GoogleService-Info.plist in Resources */,
 				F2E323A325C14DB70075EB2A /* Assets.xcassets in Resources */,
 				F2E323A125C14DB60075EB2A /* Main.storyboard in Resources */,
+				2248A078260A10750083AE7F /* TabBarStoryboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -230,6 +233,7 @@
 				F2887A0E25DA5C6500B53DD6 /* SettingsTableViewController.swift in Sources */,
 				F2E3239E25C14DB60075EB2A /* LoginViewController.swift in Sources */,
 				F2E3239A25C14DB60075EB2A /* AppDelegate.swift in Sources */,
+				2248A075260A0AC90083AE7F /* TabBarController.swift in Sources */,
 				F2887A1125E3989B00B53DD6 /* User.swift in Sources */,
 				F2E3239C25C14DB60075EB2A /* SceneDelegate.swift in Sources */,
 			);
@@ -244,14 +248,6 @@
 				F2E323A025C14DB60075EB2A /* Base */,
 			);
 			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		F2E323A425C14DB70075EB2A /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				F2E323A525C14DB70075EB2A /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

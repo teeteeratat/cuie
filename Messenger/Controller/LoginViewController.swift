@@ -46,16 +46,25 @@ class LoginViewController: UIViewController {
         statusPickerView.delegate = self
         statusPickerView.dataSource = self
         statusPickerView.tag = 1
+        self.navigationController?.isNavigationBarHidden = true
         //Mark - back-end connection
         
     }
     //Mark IBActions
     @IBAction func LogInButtonPressed(_ sender: UIButton) {
         if sender.titleLabel?.text == "Log In" {
-            logIn()
+            if logIn() {
+                
+                let board = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
+                let homeView = board.instantiateViewController(withIdentifier: "tabbar") as! TabBarController
+                
+                self.navigationController?.pushViewController(homeView, animated: true)
+            }
         }
         if sender.titleLabel?.text == "Register" {
-            signUp()
+            if signUp() {
+                
+            }
         }
     }
     
@@ -67,15 +76,14 @@ class LoginViewController: UIViewController {
         
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField){
+        //print("c")
+    }
     
     //Mark Set up
     private func setupTextFieldDelegates(){
         StudentNumberTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
         PasswordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField){
-        //print("c")
     }
     
     private func setupBackgroundTap() {
@@ -105,13 +113,13 @@ class LoginViewController: UIViewController {
     }
     
     //Mark - Navigation
-    private func goToApp() {
-        
-        let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
-        
-        mainView.modalPresentationStyle = .fullScreen
-        self.present(mainView, animated: true, completion: nil)
-    }
+//    private func goToApp() {
+//
+//        let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
+//
+//        mainView.modalPresentationStyle = .fullScreen
+//        self.present(mainView, animated: true, completion: nil)
+//    }
     
     
 }
@@ -137,7 +145,7 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension LoginViewController {
-    func signUp() {
+    func signUp() -> Bool {
         let registerParams: [String: String?] = [
             "name": NameTextField.text,
             "surname": SurnameTextField.text,
@@ -147,31 +155,42 @@ extension LoginViewController {
             "status": StatusTextField.text
         ]
         let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signup", method: .post, parameters: registerParams)
-       
+        
+        var success: Bool = false
+        
         request.responseJSON { (data) in
-            print(data.response?.statusCode)
             print(data)
             if let code = data.response?.statusCode {
                 switch code {
-                case 200...299: break
-                    
+                case 200:
+                    success = true
                 default:
-                    print("-")
+                    success = false
                 }
             }
         }
+        return success
     }
     
-    func logIn() {
+    func logIn() -> Bool {
         let logInParams: [String: String?] = [
             "userID": StudentNumberTextField.text,
             "password": PasswordTextField.text,
         ]
         let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signin", method: .post, parameters: logInParams)
+        
+        var success: Bool = false
         request.responseJSON { (data) in
-            print(data.response?.statusCode)
-            print(data)
+            switch data.result {
+            
+            case .success(_):
+                success = true
+            case .failure(_):
+                success = false
+            }
         }
+        
+        return true
     }
     
 }
