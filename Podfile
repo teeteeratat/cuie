@@ -8,7 +8,7 @@ target 'Messenger' do
   # Pods for Messenger
 
 pod 'Alamofire', '~> 5.2'
-
+pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
 
 end

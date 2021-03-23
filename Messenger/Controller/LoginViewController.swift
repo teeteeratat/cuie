@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var SignUpButtonOutlet: UIButton!
     @IBOutlet weak var ForgetPasswordButtonOutlet: UIButton!
     
-    
     //Mark View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +38,7 @@ class LoginViewController: UIViewController {
         updateUIFor(login: true)
         
         setupTextFieldDelegates()
+        setupTextField()
         setupBackgroundTap()
         
         StatusTextField.inputView = statusPickerView
@@ -46,20 +46,17 @@ class LoginViewController: UIViewController {
         statusPickerView.delegate = self
         statusPickerView.dataSource = self
         statusPickerView.tag = 1
-        self.navigationController?.isNavigationBarHidden = true
+        
+        navigationController?.isNavigationBarHidden = true
         //Mark - back-end connection
+        //3851d0eba9c7bd49509623b553133b5b9fbbe412
         
     }
     //Mark IBActions
     @IBAction func LogInButtonPressed(_ sender: UIButton) {
         if sender.titleLabel?.text == "Log In" {
-            if logIn() {
-                
-                let board = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
-                let homeView = board.instantiateViewController(withIdentifier: "tabbar") as! TabBarController
-                
-                self.navigationController?.pushViewController(homeView, animated: true)
-            }
+            logIn()
+            
         }
         if sender.titleLabel?.text == "Register" {
             if signUp() {
@@ -83,7 +80,9 @@ class LoginViewController: UIViewController {
     //Mark Set up
     private func setupTextFieldDelegates(){
         StudentNumberTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        
         PasswordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+       
     }
     
     private func setupBackgroundTap() {
@@ -93,7 +92,6 @@ class LoginViewController: UIViewController {
     
     @objc func backgroundTap(){
         view.endEditing(false)
-        //print("bj")
     }
     
     
@@ -112,16 +110,27 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //Mark - Navigation
-//    private func goToApp() {
-//
-//        let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
-//
-//        mainView.modalPresentationStyle = .fullScreen
-//        self.present(mainView, animated: true, completion: nil)
-//    }
+    private func setupTextField() {
+        StudentNumberTextField.layer.cornerRadius = 5
+        StudentNumberTextField.autocapitalizationType = .words
+        
+        PasswordTextField.layer.cornerRadius = 5
+        PasswordTextField.autocapitalizationType = .words
+        
+        StatusTextField.layer.cornerRadius = 5
+        StatusTextField.autocapitalizationType = .words
+        
+        NameTextField.layer.cornerRadius = 5
+        NameTextField.autocapitalizationType = .words
+        
+        SurnameTextField.layer.cornerRadius = 5
+        SurnameTextField.autocapitalizationType = .words
+        
+        emailTextField.layer.cornerRadius = 5
+        emailTextField.autocapitalizationType = .words
     
-    
+    }
+
 }
 
 extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -172,25 +181,51 @@ extension LoginViewController {
         return success
     }
     
-    func logIn() -> Bool {
+    func logIn() {
         let logInParams: [String: String?] = [
             "userID": StudentNumberTextField.text,
             "password": PasswordTextField.text,
         ]
         let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signin", method: .post, parameters: logInParams)
         
-        var success: Bool = false
+        createSpinnerView()
+        
         request.responseJSON { (data) in
             switch data.result {
-            
             case .success(_):
-                success = true
+                self.changeToHome()
             case .failure(_):
-                success = false
+                print("Login failed")
             }
         }
+            
+    }
+    
+    
+    func changeToHome() {
         
-        return true
+        let board = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
+        guard let homeView = board.instantiateViewController(withIdentifier: "tabbar") as? TabBarController else { return }
+        
+        self.navigationController?.pushViewController(homeView, animated: true)
+    }
+    
+    func createSpinnerView() {
+        let child = SpinnerViewController()
+        
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // then remove the spinner view controller
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
     }
     
 }
