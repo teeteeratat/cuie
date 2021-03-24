@@ -51,10 +51,11 @@ class SettingsTableViewController: UITableViewController {
     }
     
     @IBAction func logOutButtonPressed(_ sender: Any) {
-        print("Logout")
+        performSegue(withIdentifier: "unwindLogin", sender: self)
     }
     
     //Mark - Update UI
     private func showUserInfo() {
+        
     }
 }

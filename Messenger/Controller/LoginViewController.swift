@@ -38,7 +38,7 @@ class LoginViewController: UIViewController {
         updateUIFor(login: true)
         
         setupTextFieldDelegates()
-        setupTextField()
+        setupStyle()
         setupBackgroundTap()
         
         StatusTextField.inputView = statusPickerView
@@ -73,6 +73,8 @@ class LoginViewController: UIViewController {
         
     }
     
+    @IBAction func unwindLogin(segue: UIStoryboardSegue) { } 
+    
     @objc func textFieldDidChange(_ textField: UITextField){
         //print("c")
     }
@@ -96,7 +98,6 @@ class LoginViewController: UIViewController {
     
     
     //Mark Animation
-    
     private func updateUIFor(login: Bool) {
         LogInButtonOutlet.setTitle( login ? "Log In" : "Register" , for: .normal)
         SignUpButtonOutlet.setTitle(login ? "Sign Up." : "Log In.", for: .normal)
@@ -110,7 +111,7 @@ class LoginViewController: UIViewController {
         }
     }
     
-    private func setupTextField() {
+    private func setupStyle() {
         StudentNumberTextField.layer.cornerRadius = 5
         StudentNumberTextField.autocapitalizationType = .words
         
@@ -128,7 +129,10 @@ class LoginViewController: UIViewController {
         
         emailTextField.layer.cornerRadius = 5
         emailTextField.autocapitalizationType = .words
-    
+        
+        LogInButtonOutlet.layer.cornerRadius = 5
+        SignUpButtonOutlet.layer.cornerRadius = 5
+        
     }
 
 }

@@ -73,7 +73,7 @@
                             <button opaque="NO" alpha="0.94999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y6w-34-aqg">
                                 <rect key="frame" x="20" y="654" width="374" height="32"/>
                                 <color key="backgroundColor" name="AccentColor"/>
-                                <fontDescription key="fontDescription" name="Avenir-Medium" family="Avenir" pointSize="14"/>
+                                <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="14"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" name="collectionViewBackground"/>
                                 </state>
@@ -158,9 +158,11 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="OpK-Hq-9I0"/>
+                        <segue destination="Xbm-O3-Vnw" kind="unwind" identifier="unwindLogin" unwindAction="unwindLoginWithSegue:" id="Og0-ht-QpB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="115-Dt-xbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="Xbm-O3-Vnw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-657.97101449275362" y="50.892857142857139"/>
         </scene>

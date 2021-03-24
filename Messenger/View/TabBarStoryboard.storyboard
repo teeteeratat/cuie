@@ -186,7 +186,6 @@
                                                     </state>
                                                     <connections>
                                                         <action selector="logOutButtonPressed:" destination="5ra-a8-iSr" eventType="touchUpInside" id="atR-uN-Aso"/>
-                                                        <segue destination="Vfs-pZ-glb" kind="show" id="4yF-TW-RND"/>
                                                     </connections>
                                                 </button>
                                             </subviews>
@@ -211,21 +210,13 @@
                         <outlet property="statusLabel" destination="EaI-wM-5JQ" id="kt4-F7-ZE3"/>
                         <outlet property="usernameLabel" destination="5I2-xe-8Qy" id="wxc-Mh-v89"/>
                         <outlet property="versionLabel" destination="pmg-qQ-Er0" id="PD6-Bd-rfQ"/>
+                        <segue destination="uzf-9E-6Gs" kind="unwind" identifier="unwindLogin" unwindAction="unwindLoginWithSegue:" id="mJp-fB-l8H"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bR-eT-DuU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <exit id="uzf-9E-6Gs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2587" y="1339"/>
-        </scene>
-        <!--login-->
-        <scene sceneID="iDJ-XW-Gzb">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="login" id="Vfs-pZ-glb" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="lAA-Y7-pHr"/>
-                </viewControllerPlaceholder>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aJE-7k-Kyo" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3422" y="1339"/>
         </scene>
         <!--Chat-->
         <scene sceneID="eCU-KX-S9B">
