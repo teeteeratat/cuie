@@ -52,7 +52,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zH3-2N-A3k" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2586.9565217391305" y="487.5"/>
+            <point key="canvasLocation" x="2587" y="552"/>
         </scene>
         <!--Setting-->
         <scene sceneID="gdl-ZS-Xx1">
@@ -207,10 +207,11 @@
                     <navigationItem key="navigationItem" title="Setting" id="c4m-ca-7we"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="avatarImage" destination="Jpe-9O-Cnd" id="ZGM-dj-v7b"/>
                         <outlet property="statusLabel" destination="EaI-wM-5JQ" id="kt4-F7-ZE3"/>
                         <outlet property="usernameLabel" destination="5I2-xe-8Qy" id="wxc-Mh-v89"/>
                         <outlet property="versionLabel" destination="pmg-qQ-Er0" id="PD6-Bd-rfQ"/>
-                        <segue destination="uzf-9E-6Gs" kind="unwind" identifier="unwindLogin" unwindAction="unwindLoginWithSegue:" id="mJp-fB-l8H"/>
+                        <segue destination="uzf-9E-6Gs" kind="unwind" identifier="unwindLogin" unwindAction="unwindLoginWithSegue:" id="dUB-2G-8oL"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4bR-eT-DuU" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -232,7 +233,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vxN-wy-o12" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1183" y="-882"/>
+            <point key="canvasLocation" x="2587" y="-946"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="9Wu-D9-9Wc">

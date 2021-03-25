@@ -158,11 +158,9 @@
                     <nil name="viewControllers"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="OpK-Hq-9I0"/>
-                        <segue destination="Xbm-O3-Vnw" kind="unwind" identifier="unwindLogin" unwindAction="unwindLoginWithSegue:" id="Og0-ht-QpB"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="115-Dt-xbK" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <exit id="Xbm-O3-Vnw" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-657.97101449275362" y="50.892857142857139"/>
         </scene>

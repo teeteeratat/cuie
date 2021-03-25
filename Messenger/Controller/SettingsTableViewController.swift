@@ -13,7 +13,8 @@ class SettingsTableViewController: UITableViewController {
     
     @IBOutlet weak var usernameLabel: UILabel!
     @IBOutlet weak var statusLabel: UILabel!
-    @IBOutlet weak var avatarImageView: UIImageView!
+    @IBOutlet weak var avatarImage: UIImageView!
+    
     @IBOutlet weak var versionLabel: UILabel!
     
     //Mark: - View Life Cycle
@@ -27,7 +28,7 @@ class SettingsTableViewController: UITableViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        showUserInfo()
+        setupUser()
     }
     
     //Mark - Tableview delegates
@@ -54,8 +55,21 @@ class SettingsTableViewController: UITableViewController {
         performSegue(withIdentifier: "unwindLogin", sender: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "unwindLogin" {
+            guard let loginVC = segue.destination as? LoginViewController else { return }
+            loginVC.PasswordTextField.text = ""
+        }
+    }
+    
     //Mark - Update UI
-    private func showUserInfo() {
+    private func setupUser() {
+        usernameLabel.text = "Pon-ek"
         
+        statusLabel.text = "online"
+        
+        avatarImage.image = UIImage(named: "avatar")
+        
+        versionLabel.text = "version 1.0.0"
     }
 }

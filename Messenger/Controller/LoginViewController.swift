@@ -70,13 +70,12 @@ class LoginViewController: UIViewController {
     
     @IBAction func SingUpButtonPressed(_ sender: UIButton) {
         updateUIFor(login: sender.titleLabel?.text == "Log In.")
-        
     }
     
     @IBAction func unwindLogin(segue: UIStoryboardSegue) { } 
     
     @objc func textFieldDidChange(_ textField: UITextField){
-        //print("c")
+        
     }
     
     //Mark Set up
@@ -113,22 +112,29 @@ class LoginViewController: UIViewController {
     
     private func setupStyle() {
         StudentNumberTextField.layer.cornerRadius = 5
-        StudentNumberTextField.autocapitalizationType = .words
+        StudentNumberTextField.autocapitalizationType = .none
+        StudentNumberTextField.autocorrectionType = .no
         
         PasswordTextField.layer.cornerRadius = 5
-        PasswordTextField.autocapitalizationType = .words
+        PasswordTextField.autocapitalizationType = .none
+        PasswordTextField.isSecureTextEntry = true
+        PasswordTextField.autocorrectionType = .no
         
         StatusTextField.layer.cornerRadius = 5
-        StatusTextField.autocapitalizationType = .words
+        StatusTextField.autocapitalizationType = .none
+        StatusTextField.autocorrectionType = .no
         
         NameTextField.layer.cornerRadius = 5
-        NameTextField.autocapitalizationType = .words
+        NameTextField.autocapitalizationType = .none
+        NameTextField.autocorrectionType = .no
         
         SurnameTextField.layer.cornerRadius = 5
-        SurnameTextField.autocapitalizationType = .words
+        SurnameTextField.autocapitalizationType = .none
+        SurnameTextField.autocorrectionType = .no
         
         emailTextField.layer.cornerRadius = 5
-        emailTextField.autocapitalizationType = .words
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
         
         LogInButtonOutlet.layer.cornerRadius = 5
         SignUpButtonOutlet.layer.cornerRadius = 5
@@ -199,7 +205,7 @@ extension LoginViewController {
             case .success(_):
                 self.changeToHome()
             case .failure(_):
-                print("Login failed")
+                self.presentAlert()
             }
         }
             
@@ -230,6 +236,12 @@ extension LoginViewController {
             child.view.removeFromSuperview()
             child.removeFromParent()
         }
+    }
+    
+    func presentAlert() {
+        let alert = UIAlertController(title: "Login Failed", message: "Id or password is incorrect.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
