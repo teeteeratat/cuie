@@ -31,7 +31,6 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var SignUpButtonOutlet: UIButton!
     @IBOutlet weak var ForgetPasswordButtonOutlet: UIButton!
     
-    
     //Mark View LifeCycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,6 +38,7 @@ class LoginViewController: UIViewController {
         updateUIFor(login: true)
         
         setupTextFieldDelegates()
+        setupStyle()
         setupBackgroundTap()
         
         StatusTextField.inputView = statusPickerView
@@ -46,16 +46,22 @@ class LoginViewController: UIViewController {
         statusPickerView.delegate = self
         statusPickerView.dataSource = self
         statusPickerView.tag = 1
+        
+        navigationController?.isNavigationBarHidden = true
         //Mark - back-end connection
+        //3851d0eba9c7bd49509623b553133b5b9fbbe412
         
     }
     //Mark IBActions
     @IBAction func LogInButtonPressed(_ sender: UIButton) {
         if sender.titleLabel?.text == "Log In" {
             logIn()
+            
         }
         if sender.titleLabel?.text == "Register" {
-            signUp()
+            if signUp() {
+                
+            }
         }
     }
     
@@ -64,18 +70,20 @@ class LoginViewController: UIViewController {
     
     @IBAction func SingUpButtonPressed(_ sender: UIButton) {
         updateUIFor(login: sender.titleLabel?.text == "Log In.")
-        
     }
     
+    @IBAction func unwindLogin(segue: UIStoryboardSegue) { } 
+    
+    @objc func textFieldDidChange(_ textField: UITextField){
+        
+    }
     
     //Mark Set up
     private func setupTextFieldDelegates(){
         StudentNumberTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
+        
         PasswordTextField.addTarget(self, action: #selector(textFieldDidChange), for: .editingChanged)
-    }
-    
-    @objc func textFieldDidChange(_ textField: UITextField){
-        //print("c")
+       
     }
     
     private func setupBackgroundTap() {
@@ -85,12 +93,10 @@ class LoginViewController: UIViewController {
     
     @objc func backgroundTap(){
         view.endEditing(false)
-        //print("bj")
     }
     
     
     //Mark Animation
-    
     private func updateUIFor(login: Bool) {
         LogInButtonOutlet.setTitle( login ? "Log In" : "Register" , for: .normal)
         SignUpButtonOutlet.setTitle(login ? "Sign Up." : "Log In.", for: .normal)
@@ -104,16 +110,37 @@ class LoginViewController: UIViewController {
         }
     }
     
-    //Mark - Navigation
-    private func goToApp() {
+    private func setupStyle() {
+        StudentNumberTextField.layer.cornerRadius = 5
+        StudentNumberTextField.autocapitalizationType = .none
+        StudentNumberTextField.autocorrectionType = .no
         
-        let mainView = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MainView") as! UITabBarController
+        PasswordTextField.layer.cornerRadius = 5
+        PasswordTextField.autocapitalizationType = .none
+        PasswordTextField.isSecureTextEntry = true
+        PasswordTextField.autocorrectionType = .no
         
-        mainView.modalPresentationStyle = .fullScreen
-        self.present(mainView, animated: true, completion: nil)
+        StatusTextField.layer.cornerRadius = 5
+        StatusTextField.autocapitalizationType = .none
+        StatusTextField.autocorrectionType = .no
+        
+        NameTextField.layer.cornerRadius = 5
+        NameTextField.autocapitalizationType = .none
+        NameTextField.autocorrectionType = .no
+        
+        SurnameTextField.layer.cornerRadius = 5
+        SurnameTextField.autocapitalizationType = .none
+        SurnameTextField.autocorrectionType = .no
+        
+        emailTextField.layer.cornerRadius = 5
+        emailTextField.autocapitalizationType = .none
+        emailTextField.autocorrectionType = .no
+        
+        LogInButtonOutlet.layer.cornerRadius = 5
+        SignUpButtonOutlet.layer.cornerRadius = 5
+        
     }
-    
-    
+
 }
 
 extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
@@ -137,7 +164,7 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension LoginViewController {
-    func signUp() {
+    private func signUp() -> Bool {
         let registerParams: [String: String?] = [
             "name": NameTextField.text,
             "surname": SurnameTextField.text,
@@ -147,31 +174,74 @@ extension LoginViewController {
             "status": StatusTextField.text
         ]
         let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signup", method: .post, parameters: registerParams)
-       
+        
+        var success: Bool = false
+        
         request.responseJSON { (data) in
-            print(data.response?.statusCode)
             print(data)
             if let code = data.response?.statusCode {
                 switch code {
-                case 200...299: break
-                    
+                case 200:
+                    success = true
                 default:
-                    print("-")
+                    success = false
                 }
             }
         }
+        return success
     }
     
-    func logIn() {
+    private func logIn() {
         let logInParams: [String: String?] = [
             "userID": StudentNumberTextField.text,
             "password": PasswordTextField.text,
         ]
         let request = AF.request("https://9ef7ffe9-4841-4089-ba5a-ee467082da30.mock.pstmn.io/users/signin", method: .post, parameters: logInParams)
+        
+        createSpinnerView()
+        
         request.responseJSON { (data) in
-            print(data.response?.statusCode)
-            print(data)
+            switch data.result {
+            case .success(_):
+                self.changeToHome()
+            case .failure(_):
+                self.presentAlert()
+            }
         }
+            
+    }
+    
+    
+    private func changeToHome() {
+        
+        let board = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
+        guard let homeView = board.instantiateViewController(withIdentifier: "tabbar") as? TabBarController else { return }
+        
+        self.navigationController?.pushViewController(homeView, animated: true)
+    }
+    
+    private func createSpinnerView() {
+        let child = SpinnerViewController()
+        
+        // add the spinner view controller
+        addChild(child)
+        child.view.frame = view.frame
+        view.addSubview(child.view)
+        child.didMove(toParent: self)
+        
+        // wait two seconds to simulate some work happening
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+            // then remove the spinner view controller
+            child.willMove(toParent: nil)
+            child.view.removeFromSuperview()
+            child.removeFromParent()
+        }
+    }
+    
+    private func presentAlert() {
+        let alert = UIAlertController(title: "Login Failed", message: "Id or password is incorrect.", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
 }

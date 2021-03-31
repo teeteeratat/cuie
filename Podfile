@@ -7,25 +7,8 @@ target 'Messenger' do
 
   # Pods for Messenger
 
-pod 'Firebase/Core'
-pod 'Firebase/Auth'
-pod 'Firebase/Firestore'
-pod 'Firebase/Storage'
-pod 'Firebase/Analytics'
-pod 'Firebase/Messaging'
-pod 'FirebaseFirestoreSwift'
+pod 'Alamofire', '~> 5.2'
+pod 'Socket.IO-Client-Swift', '~> 15.2.0'
 
-pod 'Alamofire'
-
-pod 'Gallery'
-pod 'RealmSwift'
-
-pod 'ProgressHUD'
-pod 'SKPhotoBrowser'
-
-pod 'MessageKit'
-pod 'InputBarAccessoryView'
-
-pod 'SwiftyJSON'
 
 end
