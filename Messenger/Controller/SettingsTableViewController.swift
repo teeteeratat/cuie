@@ -46,15 +46,42 @@ class SettingsTableViewController: UITableViewController {
         return section == 0 ? 0.0 : 10.0
     }
     
-    //Mark: - IBActions
-    @IBAction func termsAndConditionsButtonPressed(_ sender: Any) {
-        print("Show term and condition")
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            if (indexPath.row == 0) {
+                profileAction()
+            }
+            else if (indexPath.row == 1) {
+                detailAction()
+            }
+            else if (indexPath.row == 2) {
+                termAction()
+            }
+        }
+        else if (indexPath.section == 2) {
+            if (indexPath.row == 1) {
+                logoutAction()
+            }
+        }
     }
     
-    @IBAction func logOutButtonPressed(_ sender: Any) {
+    private func profileAction() {
+        print("profile")
+    }
+    
+    private func detailAction() {
+        print("detail")
+    }
+    
+    private func termAction() {
+        print("terms and conditions")
+    }
+    
+    private func logoutAction() {
         performSegue(withIdentifier: "unwindLogin", sender: self)
     }
     
+    //Prepare for returning to login view
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "unwindLogin" {
             guard let loginVC = segue.destination as? LoginViewController else { return }
@@ -70,6 +97,6 @@ class SettingsTableViewController: UITableViewController {
         
         avatarImage.image = UIImage(named: "avatar")
         
-        versionLabel.text = "version 1.0.0"
+        versionLabel.text = "Version 1.0.0"
     }
 }

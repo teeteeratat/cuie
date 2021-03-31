@@ -164,7 +164,7 @@ extension LoginViewController: UIPickerViewDataSource, UIPickerViewDelegate {
 }
 
 extension LoginViewController {
-    func signUp() -> Bool {
+    private func signUp() -> Bool {
         let registerParams: [String: String?] = [
             "name": NameTextField.text,
             "surname": SurnameTextField.text,
@@ -191,7 +191,7 @@ extension LoginViewController {
         return success
     }
     
-    func logIn() {
+    private func logIn() {
         let logInParams: [String: String?] = [
             "userID": StudentNumberTextField.text,
             "password": PasswordTextField.text,
@@ -212,7 +212,7 @@ extension LoginViewController {
     }
     
     
-    func changeToHome() {
+    private func changeToHome() {
         
         let board = UIStoryboard(name: "TabBarStoryboard", bundle: nil)
         guard let homeView = board.instantiateViewController(withIdentifier: "tabbar") as? TabBarController else { return }
@@ -220,7 +220,7 @@ extension LoginViewController {
         self.navigationController?.pushViewController(homeView, animated: true)
     }
     
-    func createSpinnerView() {
+    private func createSpinnerView() {
         let child = SpinnerViewController()
         
         // add the spinner view controller
@@ -238,7 +238,7 @@ extension LoginViewController {
         }
     }
     
-    func presentAlert() {
+    private func presentAlert() {
         let alert = UIAlertController(title: "Login Failed", message: "Id or password is incorrect.", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: nil))
         self.present(alert, animated: true, completion: nil)
